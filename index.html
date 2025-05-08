@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sema Akkuş | Otel İşletmecisi</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        /* Temel Stiller */
+        :root {
+            --main-dark: #0a0a0a;
+            --navy: #1a2238;
+            --navy-light: #2a3356;
+            --white: #f5f5f5;
+            --accent: #3a86ff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            background-color: var(--main-dark);
+            color: var(--white);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        a {
+            text-decoration: none;
+            color: var(--white);
+            transition: all 0.3s ease;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Bölümü */
+        header {
+            background-color: var(--navy);
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--white);
+            letter-spacing: 1px;
+        }
+        
+        .logo span {
+            color: var(--accent);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            font-weight: 500;
+            position: relative;
+            padding-bottom: 5px;
+        }
+        
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .burger {
+            display: none;
+            cursor: pointer;
+        }
+        
+        /* Hero Bölümü */
+        #hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            background-color: var(--navy);
+            overflow: hidden;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            animation: fadeInDown 1s;
+        }
+        
+        .hero-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            color: var(--accent);
+            animation: fadeInUp 1s;
+        }
+        
+        .hero-content p {
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+            max-width: 600px;
+            animation: fadeIn 1.2s;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--accent);
+            color: var(--white);
+            padding: 12px 30px;
+            border-radius: 5px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            border: 2px solid var(--accent);
+            animation: fadeInUp 1.4s;
+            box-shadow: 0 4px 10px rgba(58, 134, 255, 0.3);
+        }
+        
+        .btn:hover {
+            background-color: transparent;
+            color: var(--accent);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(58, 134, 255, 0.4);
+        }
+        
+        .scroll-down {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+        
+        .scroll-down i {
+            font-size: 24px;
+            color: var(--white);
+        }
+        
+        /* Particles */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        .particle {
+            position: absolute;
+            opacity: 0.5;
+            border-radius: 50%;
+            animation: float 20s linear infinite;
+        }
+        
+        /* Hakkımda Bölümü */
+        #hakkimda {
+            padding: 100px 0;
+            background-color: var(--main-dark);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            display: inline-block;
+            padding-bottom: 10px;
+            position: relative;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 70px;
+            height: 3px;
+            background-color: var(--accent);
+        }
+        
+        .about-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+        }
+        
+        .about-text {
+            flex: 1;
+        }
+        
+        .about-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--accent);
+        }
+        
+        .about-text p {
+            margin-bottom: 15px;
+            font-size: 1.05rem;
+        }
+        
+        .about-img {
+            flex: 1;
+            text-align: center;
+        }
+        
+        .profile-img {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 0 20px rgba(58, 134, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .profile-img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(58, 134, 255, 0.5);
+        }
+        
+        /* Yetenekler Bölümü */
+        #yetenekler {
+            padding: 100px 0;
+            background-color: var(--navy);
+        }
+        
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .skill-card {
+            background-color: var(--navy-light);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .skill-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            top: -100%;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(58, 134, 255, 0.3), transparent);
+            transition: all 0.5s ease;
+        }
+        
+        .skill-card:hover::before {
+            top: 0;
+            left: 0;
+        }
+        
+        .skill-card i {
+            font-size: 40px;
+            color: var(--accent);
+            margin-bottom: 20px;
+        }
+        
+        .skill-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .skill-card p {
+            font-size: 1rem;
+        }
+        
+        /* Projeler Bölümü */
+        #projeler {
+            padding: 100px 0;
+            background-color: var(--main-dark);
+        }
+        
+        .projects-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .project-card {
+            background-color: var(--navy);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .project-img {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .project-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.5s ease;
+        }
+        
+        .project-card:hover .project-img img {
+            transform: scale(1.1);
+        }
+        
+        .project-info {
+            padding: 20px;
+        }
+        
+        .project-info h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+        
+        .project-info p {
+            margin-bottom: 20px;
+            color: #ccc;
+        }
+        
+        .project-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .project-links a {
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        .project-links a:first-child {
+            background-color: var(--accent);
+            color: var(--white);
+        }
+        
+        .project-links a:first-child:hover {
+            background-color: transparent;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+        }
+        
+        .project-links a:last-child {
+            border: 1px solid var(--white);
+        }
+        
+        .project-links a:last-child:hover {
+            background-color: var(--white);
+            color: var(--navy);
+        }
+        
+        /* İletişim Bölümü */
+        #iletisim {
+            padding: 100px 0;
+            background-color: var(--navy);
+        }
+        
+        .contact-content {
+            display: flex;
+            justify-content: space-between;
+            gap: 40px;
+        }
+        
+        .contact-info {
+            flex: 1;
+        }
+        
+        .contact-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            color: var(--accent);
+        }
+        
+        .contact-info p {
+            margin-bottom: 20px;
+        }
+        
+        .contact-details {
+            margin-bottom: 30px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .contact-item i {
+            width: 40px;
+            height: 40px;
+            background-color: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: var(--white);
+            font-size: 1.2rem;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--navy-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--accent);
+            transform: translateY(-5px);
+        }
+        
+        .contact-form {
+            flex: 1;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border-radius: 5px;
+            border: 1px solid #444;
+            background-color: rgba(255, 255, 255, 0.05);
+            color: var(--white);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 10px rgba(58, 134, 255, 0.3);
+        }
+        
+        textarea.form-control {
+            resize: vertical;
+            min-height: 120px;
+        }
+        
+        .submit-btn {
+            background-color: var(--accent);
+            color: var(--white);
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        
+        .submit-btn:hover {
+            background-color: transparent;
+            border: 2px solid var(--accent);
+            color: var(--accent);
+            transform: translateY(-3px);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--main-dark);
+            padding: 30px 0;
+            text-align: center;
+        }
+        
+        .footer-content p {
+            margin-bottom: 15px;
+        }
+        
+        .copyright {
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        
+        /* Animasyonlar */
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0.5;
+            }
+            50% {
+                transform: translateY(-20px) rotate(180deg);
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(0) rotate(360deg);
+                opacity: 0.5;
+            }
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0) translateX(-50%);
+            }
+            40% {
+                transform: translateY(-15px) translateX(-50%);
+            }
+            60% {
+                transform: translateY(-7px) translateX(-50%);
+            }
+        }
+        
+        /* Animasyon Sınıfları */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+        }
+        
+        .fade-in.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Responsive Stiller */
+        @media screen and (max-width: 992px) {
+            .about-content {
+                flex-direction: column-reverse;
+            }
+            
+            .profile-img {
+                width: 250px;
+                height: 250px;
+                margin-bottom: 30px;
+            }
+            
+            .contact-content {
+                flex-direction: column;
+            }
+        }
+        
+        @media screen and (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-content h3 {
+                font-size: 1.2rem;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 70%;
+                height: 100vh;
+                background-color: var(--navy);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.5s ease;
+                z-index: 999;
+            }
+            
+            .nav-links.active {
+                right: 0;
+            }
+            
+            .nav-links li {
+                margin: 20px 0;
+            }
+            
+            .burger {
+                display: block;
+                z-index: 1000;
+            }
+            
+            .projects-container {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo animate__animated animate__fadeIn">Sema <span>Akkuş</span></div>
+                <ul class="nav-links">
+                    <li><a href="#hero" class="animate__animated animate__fadeIn">Ana Sayfa</a></li>
+                    <li><a href="#hakkimda" class="animate__animated animate__fadeIn">Hakkımda</a></li>
+                    <li><a href="#yetenekler" class="animate__animated animate__fadeIn">Yetenekler</a></li>
+                    <li><a href="#projeler" class="animate__animated animate__fadeIn">Projeler</a></li>
+                    <li><a href="#iletisim" class="animate__animated animate__fadeIn">İletişim</a></li>
+                </ul>
+                <div class="burger">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero">
+        <div class="particles">
+            <div class="particle" style="top: 20%; left: 10%; width: 20px; height: 20px; background-color: rgba(58, 134, 255, 0.2);"></div>
+            <div class="particle" style="top: 70%; left: 30%; width: 15px; height: 15px; background-color: rgba(255, 255, 255, 0.1);"></div>
+            <div class="particle" style="top: 40%; left: 70%; width: 25px; height: 25px; background-color: rgba(58, 134, 255, 0.15);"></div>
+            <div class="particle" style="top: 80%; left: 20%; width: 18px; height: 18px; background-color: rgba(255, 255, 255, 0.1);"></div>
+            <div class="particle" style="top: 30%; left: 80%; width: 22px; height: 22px; background-color: rgba(58, 134, 255, 0.2);"></div>
+            <div class="particle" style="top: 60%; left: 50%; width: 16px; height: 16px; background-color: rgba(255, 255, 255, 0.1);"></div>
+            <div class="particle" style="top: 10%; left: 40%; width: 20px; height: 20px; background-color: rgba(58, 134, 255, 0.15);"></div>
+        </div>
+        <div class="container">
+            <div class="hero-content">
+                <h3 class="animate__animated animate__fadeInUp">Merhaba, Ben</h3>
+                <h1 class="animate__animated animate__fadeInDown">Sema Akkuş</h1>
+                <h3 class="animate__animated animate__fadeInUp">Otel İşletmecisi</h3>
+                <p class="animate__animated animate__fadeIn">
+                    Profesyonel otel işletmeciliği deneyimimle müşteri memnuniyeti odaklı hizmet sunuyorum.
+                    Konuk deneyimini en üst seviyeye çıkarmak için yenilikçi ve kaliteli çözümler üretiyorum.
+                </p>
+                <a href="#iletisim" class="btn animate__animated animate__fadeInUp">İletişime Geç</a>
+            </div>
+        </div>
+        <div class="scroll-down">
+            <a href="#hakkimda"><i class="fas fa-chevron-down"></i></a>
+        </div>
+    </section>
+
+    <!-- Hakkımda Section -->
+    <section id="hakkimda">
+        <div class="container">
+            <div class="section-title">
+                <h2 class="fade-in">Hakkımda</h2>
+            </div>
+            <div class="about-content">
+                <div class="about-text fade-in">
+                    <h3>Otel İşletmeciliği Tutkusu</h3>
+                    <p>
+                        10 yılı aşkın deneyimimle otel sektöründe müşteri memnuniyeti odaklı işletmecilik anlayışı sunuyorum. Turizm ve işletme alanındaki eğitimim ve sektördeki kapsamlı deneyimim, misafir deneyimini en üst seviyeye çıkarmak için bana önemli bir altyapı sağlıyor.
+                    </p>
+                    <p>
+                        Birinci sınıf hizmet anlayışı, operasyonel mükemmellik ve verimli ekip yönetimi konularında uzmanım. Sürekli gelişen turizm sektöründe yenilikçi yaklaşımlar geliştirerek, işletmelerin rekabet gücünü artırmayı hedefliyorum.
+                    </p>
+                    <p>
+                        Misafirlere unutulmaz deneyimler yaşatmak, ekip üyelerinin potansiyellerini en üst düzeye çıkarmak ve işletme kârlılığını sürdürülebilir şekilde artırmak benim için en önemli başarı kriterleridir.
+                    </p>
+                </div>
+                <div class="about-img fade-in">
+                    <img src="/api/placeholder/400/400" alt="Sema Akkuş" class="profile-img">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Yetenekler Section -->
+    <section id="yetenekler">
+        <div class="container">
+            <div class="section-title">
+                <h2 class="fade-in">Yeteneklerim</h2>
+            </div>
+            <div class="skills-container">
+                <div class="skill-card fade-in">
+                    <i class="fas fa-hotel"></i>
+                    <h3>Otel Yönetimi</h3>
+                    <p>Otel operasyonlarının tüm yönlerini etkin bir şekilde yönetmek için stratejik planlama ve uygulama konusunda uzmanım.</p>
+                </div>
+                <div class="skill-card fade-in">
+                    <i class="fas fa-users"></i>
+                    <h3>Personel Yönetimi</h3>
+                    <p>Ekip motivasyonu, performans değerlendirmesi ve etkili insan kaynakları yönetimi konularında güçlü yeteneklere sahibim.</p>
+                </div>
+                <div class="skill-card fade-in">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Gelir Yönetimi</h3>
+                    <p>Otel gelirlerini optimize etmek için pazar analizleri, fiyatlandırma stratejileri ve doluluk oranı yönetimi konularında uzmanlık.</p>
+                </div>
+                <div class="skill-card fade-in">
+                    <i class="fas fa-handshake"></i>
+                    <h3>Müşteri İlişkileri</h3>
+                    <p>Misafir deneyimini en üst düzeye çıkarmak için kişiselleştirilmiş hizmet yaklaşımları ve sorun çözme becerileri.</p>
+                </div>
+                <div class="skill-card fade-in">
+                    <i class="fas fa-bullhorn"></i>
+                    <h3>Pazarlama ve Satış</h3>
+                    <p>Dijital pazarlama, sosyal medya yönetimi ve rezervasyon kanalları optimizasyonu ile doluluk oranlarını artırma.</p>
+                </div>
+                <div class="skill-card fade-in">
+                    <i class="fas fa-tasks"></i>
+                    <h3>Operasyon Yönetimi</h3>
+                    <p>Verimli otel operasyonları için süreç optimizasyonu, kalite kontrol ve maliyet yönetimi konularında deneyim.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projeler Section -->
+    <section id="projeler">
+        <div class="container">
+            <div class="section-title">
+                <h2 class="fade-in">Projelerim</h2>
+            </div>
+            <div class="projects-container">
+                <div class="project-card fade-in">
+                    <div class="project-img">
+                        <img src="/api/placeholder/400/300" alt="Mavi Koy Otel Renovasyonu">
+                    </div>
+                    <div class="project-info">
+                        <h3>Mavi Koy Otel Renovasyonu</h3>
+                        <p>5 yıldızlı bir sahil otelinin tam renovasyonu ve yeniden markalaşması. Doluluk oranında %40 artış ve müşteri memnuniyetinde belirgin iyileşme sağlandı.</p>
+                        <div class="project-links">
+                            <a href="#">Detaylar</a>
+                            <a href="#">Galeri</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card fade-in">
+                    <div class="project-img">
+                        <img src="/api/placeholder/400/300" alt="Butik Otel Konsept Geliştirme">
+                    </div>
+                    <div class="project-info">
+                        <h3>Butik Otel Konsept Geliştirme</h3>
+                        <p>Tarihi bir binada sürdürülebilirlik odaklı butik bir otel konsepti geliştirme ve uygulama projesi. Yerel değerleri öne çıkaran özgün bir deneyim tasarımı.</p>
+                        <div class="project-links">
+                            <a href="#">Detaylar</a>
+                            <a href="#">Galeri</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card fade-in">
+                    <div class="project-img">
+                        <img src="/api/placeholder/400/300" alt="Dijital Dönüşüm Projesi">
+                    </div>
+                    <div class="project-info">
+                        <h3>Otel Dijital Dönüşüm Projesi</h3>
+                        <p>Zincir otellerde dijital dönüşüm projesi yönetimi. Mobil check-in/check-out, akıllı oda sistemleri ve yapay zeka destekli müşteri hizmetleri entegrasyonu.</p>
+                        <div class="project-links">
+                            <a href="#">Detaylar</a>
+                            <a href="#">Galeri</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- İletişim Section -->
+    <section id="iletisim">
+        <div class="container">
+            <div class="section-title">
+                <h2 class="fade-in">İletişim</h2>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info fade-in">
+                    <h3>Benimle İletişime Geçin</h3>
+                    <p>Otel işletmeciliği, turizm danışmanlığı veya işbirliği fırsatları hakkında görüşm
